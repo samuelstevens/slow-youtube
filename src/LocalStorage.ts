@@ -1,12 +1,12 @@
 import { Channel, Video } from './Structures';
-import * as Cookies from 'js-cookie';
 
-const COOKIES = {
+const KEYS = {
   CHANNELS: 'channels',
   SEEN_VIDEOS: (channelId: string): string => {
     return `seen-videos-${channelId}`;
   },
 };
+
 
 class LocalStorage {
   private _channels: Channel[];
@@ -14,11 +14,11 @@ class LocalStorage {
 
   constructor() {
 
-    console.log('constructor', Cookies.getJSON());
-    this.channels = Cookies.getJSON(COOKIES.CHANNELS) || [];
+    this.channels = this.getObject(KEYS.CHANNELS, []);
+
     this._seenVideoIds = {};
     this.channels.forEach(chan => {
-      this._seenVideoIds[chan.id] = Cookies.getJSON(COOKIES.SEEN_VIDEOS(chan.id)) || [];
+      this._seenVideoIds[chan.id] = this.getObject(KEYS.SEEN_VIDEOS(chan.id), []);
     });
   }
 
@@ -27,18 +27,18 @@ class LocalStorage {
   }
 
   set channels(channels: Channel[]) {
-    Cookies.set(COOKIES.CHANNELS, channels);
+    this.setObject(KEYS.CHANNELS, channels);
 
     this._channels = channels;
   }
 
   get seenVideoIds(): Record<string, string[]> {
     return this._seenVideoIds;
-  }
+  };
 
   set seenVideoIds(videoIds: Record<string, string[]>) {
     for (const channelId in videoIds) {
-      Cookies.set(COOKIES.SEEN_VIDEOS(channelId), videoIds[channelId]);
+      this.setObject(KEYS.SEEN_VIDEOS(channelId), videoIds[channelId]);
     }
 
     this._seenVideoIds = videoIds;
@@ -58,7 +58,7 @@ class LocalStorage {
       Object.assign(existingChannel, channel);
     }
 
-    Cookies.set(COOKIES.CHANNELS, this.channels);
+    this.setObject(KEYS.CHANNELS, this.channels);
   };
 
   seen = (video: Video): boolean => {
@@ -74,8 +74,22 @@ class LocalStorage {
 
   clearSeenVideos = () => {
     for (const channelId in this.seenVideoIds) {
-      Cookies.remove(COOKIES.SEEN_VIDEOS(channelId));
+      this.removeObject(KEYS.SEEN_VIDEOS(channelId));
     }
+  };
+
+  getObject = <T>(key: string, defaultObj: T): T => {
+    const stored = window.localStorage.getItem(key);
+
+    return stored ? JSON.parse(stored) : defaultObj;
+  };
+
+  setObject = (key: string, obj: any) => {
+    window.localStorage.setItem(key, JSON.stringify(obj));
+  };
+
+  removeObject = (key: string) => {
+    window.localStorage.removeItem(key);
   };
 }
 
