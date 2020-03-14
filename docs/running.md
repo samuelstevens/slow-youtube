@@ -1,6 +1,29 @@
 # Running This Project
 
-I want this project to run all the time. Time to learn how `launchd` works!
+I want this project to run all the time. So I used the built-in version of `apachectl` with MacOS.
 
-[Source](https://stackoverflow.com/questions/6442364/running-script-upon-login-mac/13372744#13372744)
+```bash
+sudo apachectl start
+```
 
+Then edit `/etc/apache2/httpd.conf` with:
+
+```bash
+sudo vim /etc/apache2/httpd.conf
+```
+
+And change the lines with `/Library/Weserver/Documents` to whatever folder you want (I'm using `/Users/samstevens/Sites` because it seems quite central.)
+
+Then restart apache with
+
+
+```bash
+sudo apachectl restart
+```
+
+And then I copied `dist` to `/Users/samstevens/Sites` and renamed it `youtube`, then visited http://localhost/youtube and it worked!
+
+```bash
+cp -r ./dist ~/Sites/youtube
+open http://localhost/youtube
+```
