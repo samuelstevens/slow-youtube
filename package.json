@@ -1,0 +1,32 @@
+{
+  "name": "slow-youtube",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "gulp",
+    "build": "echo \"Just take ./dist and serve it from some directory.\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jquery": "^3.3.33",
+    "@types/js-cookie": "^2.2.5",
+    "browserify": "^16.5.0",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.3",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.11.1"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.1"
+  }
+}
