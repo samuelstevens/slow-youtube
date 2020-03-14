@@ -15,6 +15,6 @@ interface Video {
 
 
 
-const MAX_RESULTS = 5;
+const MAX_RESULTS = 3;
 
 export { Channel, Video, MAX_RESULTS };

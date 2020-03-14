@@ -24,6 +24,7 @@ sudo apachectl restart
 And then I copied `dist` to `/Users/samstevens/Sites` and renamed it `youtube`, then visited http://localhost/youtube and it worked!
 
 ```bash
+rm -rf ~/Sites/youtube
 cp -r ./dist ~/Sites
 mv ~/Sites/dist ~/Sites/youtube
 open http://localhost/youtube
