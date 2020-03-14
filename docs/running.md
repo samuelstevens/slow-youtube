@@ -24,6 +24,9 @@ sudo apachectl restart
 And then I copied `dist` to `/Users/samstevens/Sites` and renamed it `youtube`, then visited http://localhost/youtube and it worked!
 
 ```bash
-cp -r ./dist ~/Sites/youtube
+cp -r ./dist ~/Sites
+mv ~/Sites/dist ~/Sites/youtube
 open http://localhost/youtube
 ```
+
+Then I set [Leechblock](https://www.proginosko.com/leechblock/) to redirect to http://localhost/youtube. Easy.

@@ -28,7 +28,8 @@ const makeIFrame = (video: Video): JQuery<HTMLElement> => {
   return $('<iframe>')
     .attr('src', `https://www.youtube-nocookie.com/embed/${video.id}`)
     .attr('frameborder', 0)
-    .attr('allow', "fullscreen");
+    .attr('allow', "fullscreen")
+    .attr('allowfullscreen', '');
 };
 
 const showVideo = (video: Video, storage: LocalStorage) => {
